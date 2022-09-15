@@ -5,23 +5,59 @@ import java.time.LocalDate;
 /**
  * The class that defines the element that will be contained by your collection
  */
-public class Student //TODO consider implementing any interfaces necessary for your collection
+public class Student implements Comparable//TODO consider implementing any interfaces necessary for your collection
 {
     private String name;
     private LocalDate dateOfBirth;
     private String details;
 
+    public Student(){
+        name = null;
+        dateOfBirth = null;
+        details = null;
+    }
     public Student(String name, LocalDate dateOfBirth, String details) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.details = details;
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public LocalDate getDateOfBirth() { return dateOfBirth; }
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
 
-    public String getDetails() { return details; }
+    public String getDetails() {
+        return details;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Student student = (Student) o;
+        if (this.name.compareTo(student.name) == 0 &&
+                this.dateOfBirth.compareTo(student.dateOfBirth) == 0 &&
+                this.details.compareTo(student.details) == 0)
+            return 0;
+        else if ((this.name.compareTo(student.name) > 0) ||
+                (this.name.compareTo(student.name) == 0 && this.dateOfBirth.compareTo(student.dateOfBirth) > 0) ||
+                (this.name.compareTo(student.name) == 0 && this.dateOfBirth.compareTo(student.dateOfBirth) == 0 &&
+                        this.details.compareTo(student.details) > 0))
+            return 1;
+        else
+            return -1;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", details='" + details + '\'' +
+                '}';
+    }
 
     /*
     TODO consider overriding any methods for this object to function properly within a collection:
